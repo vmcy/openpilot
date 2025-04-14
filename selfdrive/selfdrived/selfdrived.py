@@ -247,8 +247,24 @@ class SelfdriveD:
       else:
         safety_mismatch = pandaState.safetyModel not in IGNORED_SAFETY_MODES
 
+      # Check each condition individually and log it
+      if safety_mismatch:
+          print("Safety mismatch detected.")
+          print(f"Panda Safety Model: {pandaState.safetyModel}, Car Safety Model: {self.CP.safetyConfigs[i].safetyModel}")
+          print(f"Panda Safety Param: {pandaState.safetyParam}, Car Safety Param: {self.CP.safetyConfigs[i].safetyParam}")
+
+      if self.sm.frame * DT_CTRL > 10.:
+          print(f"Safety mismatch time threshold passed: {self.sm.frame * DT_CTRL:.2f} seconds")
+
+      if pandaState.safetyRxChecksInvalid:
+          print("Panda state safety Rx checks are invalid.")
+
+      if self.mismatch_counter >= 200:
+          print(f"Mismatch counter reached threshold: {self.mismatch_counter} mismatches")
+
       # safety mismatch allows some time for pandad to set the safety mode and publish it back from panda
       if (safety_mismatch and self.sm.frame*DT_CTRL > 10.) or pandaState.safetyRxChecksInvalid or self.mismatch_counter >= 200:
+        print("mismatch gotcha")
         self.events.add(EventName.controlsMismatch)
 
       if log.PandaState.FaultType.relayMalfunction in pandaState.faults:
