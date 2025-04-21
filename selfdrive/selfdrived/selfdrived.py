@@ -252,9 +252,9 @@ class SelfdriveD:
           #print("Safety mismatch detected.")
           #print(f"Panda Safety Model: {pandaState.safetyModel}, Car Safety Model: {self.CP.safetyConfigs[i].safetyModel}")
 
-      if self.sm.frame * DT_CTRL > 10.:
+      #if self.sm.frame * DT_CTRL > 10.:
           #print(f"Panda Safety Model2: {pandaState.safetyModel}, Car Safety Model2: {self.CP.safetyConfigs[i].safetyModel}")
-          print(f"Safety mismatch time threshold passed: {self.sm.frame * DT_CTRL:.2f} seconds")
+          #print(f"Safety mismatch time threshold passed: {self.sm.frame * DT_CTRL:.2f} seconds")
 
       if pandaState.safetyRxChecksInvalid:
           print("Panda state safety Rx checks are invalid.")
