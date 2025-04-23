@@ -247,6 +247,7 @@ class SelfdriveD:
       else:
         safety_mismatch = pandaState.safetyModel not in IGNORED_SAFETY_MODES
 
+      # dummy
       # Check each condition individually and log it
       #if safety_mismatch:
           #print("Safety mismatch detected.")
