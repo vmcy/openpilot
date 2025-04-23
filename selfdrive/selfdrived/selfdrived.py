@@ -264,6 +264,7 @@ class SelfdriveD:
 
       # safety mismatch allows some time for pandad to set the safety mode and publish it back from panda
       if (safety_mismatch and self.sm.frame*DT_CTRL > 10.) or pandaState.safetyRxChecksInvalid or self.mismatch_counter >= 200:
+        print(f"Panda Safety Model3: {pandaState.safetyModel}, Car Safety Model3: {self.CP.safetyConfigs[i].safetyModel}")
         print("mismatch gotcha")
         self.events.add(EventName.controlsMismatch)
 
